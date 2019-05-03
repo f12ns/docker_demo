@@ -7,7 +7,8 @@ MAINTAINER xiaow409@163.com
 ADD ./nginx-1.14.2.tar.gz /usr/local/src
 # tar xvf nginx-1.14.2.tar.gz
 
-VOLUME [ "./volumes/data" ]
+ONBUILD VOLUME ["/data"]
+# VOLUME [ "./volumes/data" ]
 
 # running required command
 RUN yum install -y gcc gcc-c++ glibc make autoconf openssl openssl-devel 
