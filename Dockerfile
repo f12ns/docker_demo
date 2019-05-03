@@ -1,4 +1,5 @@
-FROM centos:latest
+FROM centos_nginx:v7
+# FROM centos:latest
 
 # MAINTAINER
 MAINTAINER xiaow409@163.com
@@ -13,7 +14,7 @@ ONBUILD VOLUME ["/data"]
 # running required command
 RUN yum install -y gcc gcc-c++ glibc make autoconf openssl openssl-devel 
 RUN yum install -y libxslt-devel -y gd gd-devel GeoIP GeoIP-devel pcre pcre-devel
-RUN useradd -M -s /sbin/nologin nginx
+RUN useradd -M -s /sbin/nologin nginx2
 
 WORKDIR /usr/local/src/nginx-1.14.2
 # execute command to compile nginx
@@ -21,6 +22,10 @@ RUN ./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-file
 
 # 执行PATH=/usr/local/nginx/sbin:$PATH，添加到了环境变量
 ENV PATH /usr/local/nginx/sbin:$PATH
+# PATH ：系统路径
+# $PATH ：获取原来的系统的路径
+# ENV PATH /usr/local/nginx/sbin:$PATH 这一段执行之后PATH 路径就是： /usr/local/nginx/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 EXPOSE 80
 
 # CMD, 当启动一个container时默认运行的命令，如果在启动container时赋予了command，那么
