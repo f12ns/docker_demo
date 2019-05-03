@@ -22,4 +22,9 @@ EXPOSE 80
 
 # CMD, 当启动一个container时默认运行的命令，如果在启动container时赋予了command，那么
 # 定义的CMD中的命令将不会被执行，而会去执行command的命令
-CMD /bin/sh -c 'nginx -g "daemon off;"'
+# CMD /bin/sh -c 'nginx -g "daemon off;"'
+
+# 当ENTRYPOINT和CMD连用时，CMD的命令是ENTRYPOINT命令的参数，两者连用相当于nginx -g "daemon off;"
+# 而当一起连用的时候命令格式最好一致（这里选择的都是json格式的是成功的，如果都是sh模式可以试一下）
+ENTRYPOINT ["nginx"]
+CMD ["-g","daemon on;"]
