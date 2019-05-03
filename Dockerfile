@@ -20,3 +20,6 @@ RUN ./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-file
 ENV PATH /usr/local/nginx/sbin:$PATH
 EXPOSE 80
 
+# CMD, 当启动一个container时默认运行的命令，如果在启动container时赋予了command，那么
+# 定义的CMD中的命令将不会被执行，而会去执行command的命令
+CMD /bin/sh -c 'nginx -g "daemon off;"'
